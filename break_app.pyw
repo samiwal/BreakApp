@@ -136,6 +136,35 @@ class BreakApp:
 
         except Exception as e:
             print(f"Fehler beim Autostart-Setup: {e}")
+
+    def setup_autostart(self):
+        """Registriert die App in Windows Autostart."""
+        key_path = r"Software\Microsoft\Windows\CurrentVersion\Run"
+        try:
+            key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, key_path, 0, winreg.KEY_ALL_ACCESS)
+            try:
+                winreg.QueryValueEx(key, "BreakApp_" + self.path_hash)
+                winreg.CloseKey(key)
+                return
+            except OSError:
+                pass
+
+            # Prüft, ob die App mit PyInstaller eingefroren wurde
+            if getattr(sys, 'frozen', False):
+                # Als .exe: sys.executable ist direkt der Pfad zur ausführbaren Datei
+                command = f'"{sys.executable}"'
+            else:
+                # Als Python-Skript im Entwicklungsmodus
+                python_exe = sys.executable.replace("python.exe", "pythonw.exe")
+                script_path = os.path.abspath(sys.argv[0])
+                command = f'"{python_exe}" "{script_path}"'
+
+            winreg.SetValueEx(key, "BreakApp_" + self.path_hash, 0, winreg.REG_SZ, command)
+            winreg.CloseKey(key)
+            print("Autostart erfolgreich registriert.")
+
+        except Exception as e:
+            print(f"Fehler beim Autostart-Setup: {e}")
     
     def load_settings(self):
         """Lädt verschlüsselte Settings oder setzt Defaults."""
