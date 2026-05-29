@@ -340,7 +340,7 @@ class BreakApp:
         if data is None: data = list(self.settings.items())
         inputs = {}
         for key, val in data:
-            if key == "Elapsed Work Time":
+            if key == "Elapsed Work Time" or key == "Pause End Time":
                 continue
             f = tk.Frame(settings_win)
             f.pack(fill="x")
