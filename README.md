@@ -5,6 +5,9 @@
 > 
 > If you want a different behavior, want to adjust the design, or need help setting it up: **Don't hesitate to use AI!** Simply feed this code into ChatGPT, Claude, or Gemini and let it assist you in modifying the script or troubleshooting. If you want to contribute and improve the project, an AI assistant is also a great copilot to help you navigate the codebase. Open source thrives on collaboration!
 
+> **Note on Windows SmartScreen:**
+> Since this executable is not signed with a commercial developer certificate, Windows SmartScreen might show a warning when you run it for the first time. Simply click "More info" and then "Run anyway" to start the app.
+
 ## Important Notice: Multi-Instance Usage & Liability
 
 * **Simultaneous Instances:** You can run multiple instances of this application from the exact same directory/location. It should function completely fine during your active session. 
